@@ -1,0 +1,215 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * shadcn/ui token conventions: theme tokens as CSS custom properties on
+ * :root and .dark, mapped to Tailwind colors in @theme inline below.
+ * Palette matches the family standard (fleet site):
+ * brand green #48B9D1, dark teal #0F353D / #051214, light tint #EAF6F9,
+ * accent pair light #A64B0C / dark #F48822.
+ */
+:root {
+  --background: #eaf6f9;
+  --foreground: #0f353d;
+  --depth: #d7ebf1;
+  --card: #f6fcfd;
+  --card-foreground: #0f353d;
+  --primary: #48b9d1;
+  --primary-foreground: #051214;
+  --secondary: #d7ebf1;
+  --secondary-foreground: #0f353d;
+  --muted: #dceef3;
+  --muted-foreground: #3f5f68;
+  --accent: #a64b0c;
+  --accent-foreground: #fdf3ec;
+  --border: #bcdde6;
+  --ring: #48b9d1;
+  --radius: 0.75rem;
+  /* hero wash (light: lighter tinted variant of the dark wash) */
+  --hero-glow: 32%;
+  --hero-accent-strength: 0.22;
+}
+
+.dark {
+  --background: #0f353d;
+  --foreground: #eaf6f9;
+  --depth: #051214;
+  --card: #12404a;
+  --card-foreground: #eaf6f9;
+  --primary: #48b9d1;
+  --primary-foreground: #051214;
+  --secondary: #16454f;
+  --secondary-foreground: #eaf6f9;
+  --muted: #0c2b32;
+  --muted-foreground: #a5c9d2;
+  --accent: #f48822;
+  --accent-foreground: #051214;
+  --border: #1d505b;
+  --ring: #48b9d1;
+  --radius: 0.75rem;
+  --hero-glow: 55%;
+  --hero-accent-strength: 0.4;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-depth: var(--depth);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family:
+    ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/*
+ * Hero: CSS-only atmospheric wash from the brand palette.
+ * Dark: #48B9D1 glow flowing into #0F353D and #051214.
+ * Light: a lighter, tinted variant of the same wash.
+ * Very slow drift; degrades to a solid brand background under
+ * prefers-reduced-motion.
+ */
+.hero {
+  background:
+    radial-gradient(
+      56rem 32rem at 50% 26%,
+      color-mix(in srgb, var(--primary) var(--hero-glow), transparent),
+      transparent 70%
+    ),
+    linear-gradient(180deg, var(--background) 0%, var(--background) 45%, var(--depth) 100%);
+}
+
+.hero-aurora {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.hero-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  will-change: transform;
+}
+
+.hero-blob-primary {
+  width: 44rem;
+  height: 44rem;
+  left: 50%;
+  top: -14rem;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--primary) var(--hero-glow), transparent),
+    transparent 70%
+  );
+  animation: hero-drift-a 46s ease-in-out infinite alternate;
+}
+
+.hero-blob-depth {
+  width: 52rem;
+  height: 30rem;
+  right: -12rem;
+  bottom: -14rem;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--depth) 85%, transparent),
+    transparent 70%
+  );
+  animation: hero-drift-b 58s ease-in-out infinite alternate;
+}
+
+/* the single accent highlight in the hero */
+.hero-blob-accent {
+  width: 18rem;
+  height: 18rem;
+  left: 10%;
+  top: 34%;
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--accent) calc(var(--hero-accent-strength) * 100%), transparent),
+    transparent 70%
+  );
+  animation: hero-drift-c 52s ease-in-out infinite alternate;
+}
+
+@keyframes hero-drift-a {
+  from {
+    transform: translateX(-50%) translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translateX(-50%) translate3d(4rem, 2.5rem, 0) scale(1.12);
+  }
+}
+
+@keyframes hero-drift-b {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(-5rem, -2rem, 0) scale(1.15);
+  }
+}
+
+@keyframes hero-drift-c {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(3rem, -3rem, 0) scale(1.2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .hero {
+    background: var(--background);
+  }
+  .hero-aurora {
+    display: none;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 100;
+  border-radius: var(--radius-sm);
+  background: var(--primary);
+  color: var(--primary-foreground);
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  transition: top 0.15s ease-in-out;
+}
+
+.skip-link:focus-visible {
+  top: 0.75rem;
+}
