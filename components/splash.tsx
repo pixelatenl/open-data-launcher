@@ -8,10 +8,8 @@ import { ThemeSwitcher } from "@/components/theme-switcher";
  * floats over the splash (absolute, so it scrolls away with the page),
  * and the arrow anchors down to the product tiles.
  */
-const description = [
-  "Public institutions collect this data with public money, so it deserves to be seen — every figure on these sites can be verified by anyone through the same official source.",
-  "Open data holds stories that portal spreadsheets never tell. Once the numbers are public, the questions start — and the charts follow.",
-];
+const description =
+  "Public institutions collect this data with public money, so it deserves to be seen. Every figure can be verified by anyone, through the same official source. These are the stories that portal spreadsheets never tell.";
 
 export function Splash() {
   return (
@@ -42,10 +40,8 @@ export function Splash() {
             </p>
           </div>
         </div>
-        <div className="mt-10 max-w-2xl space-y-3 text-base leading-relaxed text-muted-foreground sm:text-lg md:mt-12">
-          {description.map((paragraph) => (
-            <p key={paragraph.slice(0, 24)}>{paragraph}</p>
-          ))}
+        <div className="mt-10 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg md:mt-12">
+          <p>{description}</p>
         </div>
       </div>
       <a
