@@ -150,6 +150,63 @@ body {
   }
 }
 
+/*
+ * Splash intro (one run on page load, no looping):
+ * the logo cells drop from above their grid position and bounce into
+ * place — row by row, top-left first, 0.25s apart — adapted from the
+ * pixelate.nl logo keyframes. fill-mode both keeps each cell at its
+ * 0% frame (hidden) until its delayed start; transform-box: fill-box
+ * makes every translateY percentage relative to the 28-unit cell.
+ * The title block fades in once the logo has assembled, the scroll
+ * arrow appears last.
+ */
+.logo-cell {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: logo-cell-drop 1s ease-out both;
+  animation-delay: var(--logo-cell-delay, 0s);
+}
+
+.splash-intro {
+  animation: splash-fade-in 1.5s ease-out 2s both;
+}
+
+.splash-arrow-intro {
+  animation: splash-fade-in 0.8s ease-out 3.6s both;
+}
+
+@keyframes logo-cell-drop {
+  0% {
+    transform: translateY(-300%);
+    visibility: hidden;
+  }
+  50% {
+    transform: translateY(30%);
+  }
+  65% {
+    transform: translateY(-10%);
+  }
+  80% {
+    transform: translateY(10%);
+  }
+  95% {
+    transform: translateY(-5%);
+  }
+  100% {
+    transform: translateY(0);
+    visibility: visible;
+  }
+}
+
+@keyframes splash-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -158,6 +215,12 @@ body {
     filter: none;
   }
   .animate-splash-bob {
+    animation: none;
+  }
+  /* intro renders fully assembled, no animation */
+  .logo-cell,
+  .splash-intro,
+  .splash-arrow-intro {
     animation: none;
   }
 }
