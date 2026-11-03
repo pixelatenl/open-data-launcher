@@ -52,7 +52,7 @@ export function ThemeSwitcher() {
     <div
       role="group"
       aria-label="Color theme"
-      className="inline-flex items-center gap-1 rounded-full border border-border bg-card p-1"
+      className="inline-flex items-center gap-1 rounded-full border border-border bg-card/80 p-1 shadow-lg backdrop-blur-md"
     >
       {options.map(({ value, label, icon: Icon }) => (
         <button

@@ -26,9 +26,22 @@
   --border: #bcdde6;
   --ring: #48b9d1;
   --radius: 0.75rem;
-  /* hero wash (light: lighter tinted variant of the dark wash) */
-  --hero-glow: 32%;
-  --hero-accent-strength: 0.22;
+  /*
+   * Splash layers: brand gradient at the bottom, the dots-wave photo as a
+   * low-opacity texture, and a tinted wash on top that keeps the photo in
+   * the family palette. Light theme gets a lighter tinted variant.
+   */
+  --splash-photo-opacity: 0.24;
+  --splash-base: linear-gradient(180deg, #eaf6f9 0%, #d7ebf1 100%);
+  --splash-wash: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--primary) 12%, rgba(234, 246, 249, 0.8)) 0%,
+    rgba(234, 246, 249, 0.68) 50%,
+    color-mix(in srgb, var(--depth) 80%, rgba(215, 235, 241, 0.8)) 100%
+  );
+  /* frosted panel behind the splash title block */
+  --splash-glass-bg: color-mix(in srgb, var(--background) 58%, transparent);
+  --splash-glass-border: color-mix(in srgb, var(--foreground) 16%, transparent);
 }
 
 .dark {
@@ -48,8 +61,17 @@
   --border: #1d505b;
   --ring: #48b9d1;
   --radius: 0.75rem;
-  --hero-glow: 55%;
-  --hero-accent-strength: 0.4;
+  /* dark-first brand gradient: #48B9D1 into #0F353D and #051214 */
+  --splash-photo-opacity: 0.32;
+  --splash-base: linear-gradient(165deg, #48b9d1 0%, #0f353d 52%, #051214 100%);
+  --splash-wash: linear-gradient(
+    180deg,
+    color-mix(in srgb, #48b9d1 20%, rgba(15, 53, 61, 0.42)) 0%,
+    rgba(15, 53, 61, 0.6) 48%,
+    rgba(5, 18, 20, 0.86) 100%
+  );
+  --splash-glass-bg: rgba(234, 246, 249, 0.07);
+  --splash-glass-border: rgba(234, 246, 249, 0.18);
 }
 
 @theme inline {
@@ -73,6 +95,8 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  --animate-splash-bob: splash-bob 2.4s ease-in-out infinite;
 }
 
 html {
@@ -89,99 +113,54 @@ body {
 }
 
 /*
- * Hero: CSS-only atmospheric wash from the brand palette.
- * Dark: #48B9D1 glow flowing into #0F353D and #051214.
- * Light: a lighter, tinted variant of the same wash.
- * Very slow drift; degrades to a solid brand background under
- * prefers-reduced-motion.
+ * Splash: full-viewport brand gradient with the dots-wave photo blended in
+ * as low-opacity texture, plus a tinted wash that keeps the photo in the
+ * family palette. If the photo asset is missing, its layer simply does not
+ * paint and the gradient stands alone.
  */
-.hero {
-  background:
-    radial-gradient(
-      56rem 32rem at 50% 26%,
-      color-mix(in srgb, var(--primary) var(--hero-glow), transparent),
-      transparent 70%
-    ),
-    linear-gradient(180deg, var(--background) 0%, var(--background) 45%, var(--depth) 100%);
+.splash {
+  position: relative;
+  isolation: isolate;
+  background: var(--splash-base);
 }
 
-.hero-aurora {
+.splash-photo {
   position: absolute;
   inset: 0;
-  overflow: hidden;
+  z-index: 0;
+  background-image: url("/images/dots-wave.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: var(--splash-photo-opacity);
+  /* pull the stock blue of the photo toward the brand teal */
+  filter: hue-rotate(-24deg) saturate(0.9);
+  pointer-events: none;
 }
 
-.hero-blob {
+.splash-wash {
   position: absolute;
-  border-radius: 9999px;
-  filter: blur(70px);
-  will-change: transform;
+  inset: 0;
+  z-index: 1;
+  background: var(--splash-wash);
+  pointer-events: none;
 }
 
-.hero-blob-primary {
-  width: 44rem;
-  height: 44rem;
-  left: 50%;
-  top: -14rem;
-  background: radial-gradient(
-    circle,
-    color-mix(in srgb, var(--primary) var(--hero-glow), transparent),
-    transparent 70%
-  );
-  animation: hero-drift-a 46s ease-in-out infinite alternate;
+/* frosted panel behind the splash title block */
+.splash-glass {
+  background: var(--splash-glass-bg);
+  border: 1px solid var(--splash-glass-border);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2);
+  backdrop-filter: blur(16px) saturate(1.2);
+  box-shadow: 0 24px 60px -28px color-mix(in srgb, var(--foreground) 45%, transparent);
 }
 
-.hero-blob-depth {
-  width: 52rem;
-  height: 30rem;
-  right: -12rem;
-  bottom: -14rem;
-  background: radial-gradient(
-    circle,
-    color-mix(in srgb, var(--depth) 85%, transparent),
-    transparent 70%
-  );
-  animation: hero-drift-b 58s ease-in-out infinite alternate;
-}
-
-/* the single accent highlight in the hero */
-.hero-blob-accent {
-  width: 18rem;
-  height: 18rem;
-  left: 10%;
-  top: 34%;
-  background: radial-gradient(
-    circle,
-    color-mix(in srgb, var(--accent) calc(var(--hero-accent-strength) * 100%), transparent),
-    transparent 70%
-  );
-  animation: hero-drift-c 52s ease-in-out infinite alternate;
-}
-
-@keyframes hero-drift-a {
-  from {
-    transform: translateX(-50%) translate3d(0, 0, 0) scale(1);
+@keyframes splash-bob {
+  0%,
+  100% {
+    transform: translateY(-2px);
   }
-  to {
-    transform: translateX(-50%) translate3d(4rem, 2.5rem, 0) scale(1.12);
-  }
-}
-
-@keyframes hero-drift-b {
-  from {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  to {
-    transform: translate3d(-5rem, -2rem, 0) scale(1.15);
-  }
-}
-
-@keyframes hero-drift-c {
-  from {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  to {
-    transform: translate3d(3rem, -3rem, 0) scale(1.2);
+  50% {
+    transform: translateY(3px);
   }
 }
 
@@ -189,11 +168,11 @@ body {
   html {
     scroll-behavior: auto;
   }
-  .hero {
-    background: var(--background);
+  .splash-photo {
+    filter: none;
   }
-  .hero-aurora {
-    display: none;
+  .animate-splash-bob {
+    animation: none;
   }
 }
 

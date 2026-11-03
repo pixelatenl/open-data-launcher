@@ -36,8 +36,8 @@ served from the `deploy` branch at <https://opendata.pixelate.nl>.
 
 - `app/` — App Router entry: `layout.tsx` (metadata, theme bootstrap), `page.tsx`
   (sections + JSON-LD), `robots.ts`, `sitemap.ts`, `icon.png`, `apple-icon.png`.
-- `components/` — family header/footer, pixel grid logo, theme switcher, hero, and the
-  page sections (why open data, AI insight example, products, workbench spotlight).
+- `components/` — family footer, pixel grid logo, theme switcher, the full-viewport
+  splash (headerless launcher), and the page sections (products, workbench spotlight).
 - `lib/products.ts` — the typed product array. **Adding a product is a one-entry
   change** there; entries with status `live` render as clickable tiles, the rest as
   non-linked placeholders.
@@ -49,5 +49,5 @@ served from the `deploy` branch at <https://opendata.pixelate.nl>.
 Class strategy (`dark` on `<html>`), choice persisted in `localStorage`, defaulting to
 the operating system preference (dark when the OS has no light preference). An inline
 script in `<head>` applies the class before first paint, so there is no flash of the
-wrong theme. Both themes ship; the hero wash degrades to a solid brand background under
-`prefers-reduced-motion`.
+wrong theme. Both themes ship; the splash photo layer drops its tint filter and the
+scroll-arrow bobbing stops under `prefers-reduced-motion`.

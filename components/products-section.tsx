@@ -1,6 +1,21 @@
+import { existsSync } from "node:fs";
+import path from "node:path";
 import { ArrowUpRight, Lock } from "lucide-react";
 import { Chip } from "@/components/chip";
 import { products, productStatusLabel, type Product } from "@/lib/products";
+
+/**
+ * Static export: resolve a screenshot path against public/ at build time,
+ * so a missing asset degrades to the color-only tile instead of rendering
+ * a broken image.
+ */
+function hasAsset(src: string): boolean {
+  try {
+    return existsSync(path.join(process.cwd(), "public", src.replace(/^\/+/, "")));
+  } catch {
+    return false;
+  }
+}
 
 function DrivetrainMotif() {
   // Mini drivetrain bar echoing the fleet explorer: share of the Dutch fleet
@@ -17,23 +32,36 @@ function DrivetrainMotif() {
 }
 
 function LiveTile({ product }: { product: Product }) {
+  const screenshot =
+    product.screenshot && hasAsset(product.screenshot) ? product.screenshot : null;
   return (
     <li>
       <a
         href={product.url}
-        className="group flex h-full flex-col gap-3 rounded-xl border border-border bg-card p-6 text-card-foreground shadow-sm transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+        className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card text-card-foreground shadow-sm transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
       >
-        <div className="flex items-center justify-between gap-2">
-          <Chip tone="accent">{productStatusLabel[product.status]}</Chip>
-          <ArrowUpRight
-            size={18}
-            aria-hidden="true"
-            className="text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
+        {screenshot ? (
+          <img
+            src={screenshot}
+            alt={`Screenshot of ${product.name}`}
+            loading="lazy"
+            decoding="async"
+            className="aspect-[16/10] w-full border-b border-border object-cover"
           />
+        ) : null}
+        <div className="flex flex-1 flex-col gap-3 p-6">
+          <div className="flex items-center justify-between gap-2">
+            <Chip tone="accent">{productStatusLabel[product.status]}</Chip>
+            <ArrowUpRight
+              size={18}
+              aria-hidden="true"
+              className="text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
+            />
+          </div>
+          <h3 className="text-lg font-semibold leading-snug">{product.name}</h3>
+          <p className="text-sm leading-relaxed text-muted-foreground">{product.description}</p>
+          {!screenshot && <DrivetrainMotif />}
         </div>
-        <h3 className="text-lg font-semibold leading-snug">{product.name}</h3>
-        <p className="text-sm leading-relaxed text-muted-foreground">{product.description}</p>
-        <DrivetrainMotif />
       </a>
     </li>
   );
@@ -72,6 +100,7 @@ function GhostTile() {
 export function ProductsSection() {
   return (
     <section
+      id="products"
       aria-labelledby="products-title"
       className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24"
     >
@@ -81,6 +110,10 @@ export function ProductsSection() {
       <p className="mt-4 max-w-2xl leading-relaxed text-muted-foreground">
         Each product charts one public dataset, one question at a time. Live products open
         straight from their tile; the rest are still in research.
+      </p>
+      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+        Across the products, AI explains what the charts show — always labelled experimental,
+        with every figure computed from the official source.
       </p>
       <ul className="mt-10 grid list-none gap-5 p-0 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((product) =>

@@ -1,6 +1,4 @@
-import { Hero } from "@/components/hero";
-import { WhyOpenData } from "@/components/why-open-data";
-import { AiInsight } from "@/components/ai-insight";
+import { Splash } from "@/components/splash";
 import { ProductsSection } from "@/components/products-section";
 import { Spotlight } from "@/components/spotlight";
 
@@ -24,9 +22,7 @@ const jsonLd = {
 export default function Home() {
   return (
     <>
-      <Hero />
-      <WhyOpenData />
-      <AiInsight />
+      <Splash />
       <ProductsSection />
       <Spotlight />
       <script

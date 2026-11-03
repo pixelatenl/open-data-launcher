@@ -16,6 +16,23 @@ export function SiteFooter() {
           Every figure on this site is computed from official open data sources and can be
           verified through the same source.
         </p>
+        <p className="text-sm text-muted-foreground">
+          Photo by{" "}
+          <a
+            href="https://unsplash.com/@jonakoh"
+            className="underline decoration-primary/60 underline-offset-4 hover:decoration-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          >
+            jonakoh _
+          </a>{" "}
+          on{" "}
+          <a
+            href="https://unsplash.com/photos/abstract-blue-wave-pattern-made-of-dots-NPDRGf0w1lw"
+            className="underline decoration-primary/60 underline-offset-4 hover:decoration-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          >
+            Unsplash
+          </a>
+          .
+        </p>
       </div>
     </footer>
   );
