@@ -18,7 +18,7 @@ export function Spotlight() {
           Home Energy Dashboard
         </h2>
         <p className="mt-4 max-w-2xl leading-relaxed text-muted-foreground">
-          A self-built home energy dashboard, not an open data product — but it follows the
+          A self-built home energy dashboard, not an open data project — but it follows the
           same discipline as everything in this family: the server computes from the official
           data, and the model only narrates what the numbers mean.
         </p>

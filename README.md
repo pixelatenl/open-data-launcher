@@ -37,8 +37,8 @@ served from the `deploy` branch at <https://opendata.pixelate.nl>.
 - `app/` — App Router entry: `layout.tsx` (metadata, theme bootstrap), `page.tsx`
   (sections + JSON-LD), `robots.ts`, `sitemap.ts`, `icon.png`, `apple-icon.png`.
 - `components/` — family footer, pixel grid logo, theme switcher, the full-viewport
-  splash (headerless launcher), and the page sections (products, workbench spotlight).
-- `lib/products.ts` — the typed product array. **Adding a product is a one-entry
+  splash (headerless launcher), and the page sections (projects, workbench spotlight).
+- `lib/projects.ts` — the typed project array. **Adding a project is a one-entry
   change** there; entries with status `live` render as clickable tiles, the rest as
   non-linked placeholders.
 - `public/og-image.png` — Open Graph image (1200x630, pixel grid on the brand gradient;

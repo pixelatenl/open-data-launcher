@@ -1,12 +1,12 @@
-export type ProductStatus = "live" | "in-research" | "planned";
+export type ProjectStatus = "live" | "in-research" | "planned";
 
-export interface Product {
+export interface Project {
   name: string;
-  status: ProductStatus;
-  /** Only set for live products; placeholders carry no URL and render no link. */
+  status: ProjectStatus;
+  /** Only set for live projects; placeholders carry no URL and render no link. */
   url?: string;
   /**
-   * Optional screenshot of the product, as a path under public/ (e.g.
+   * Optional screenshot of the project, as a path under public/ (e.g.
    * "/images/fleet.png"), rendered as the visual top of the tile. If the
    * asset is not committed, the tile falls back to the color-only layout.
    */
@@ -14,17 +14,17 @@ export interface Product {
   description: string;
 }
 
-export const productStatusLabel: Record<ProductStatus, string> = {
+export const projectStatusLabel: Record<ProjectStatus, string> = {
   live: "Live",
   "in-research": "In research",
   planned: "Planned",
 };
 
 /**
- * The product family. Adding a product is a one-entry change here.
+ * The project family. Adding a project is a one-entry change here.
  * Only entries with status "live" (and a url) render as clickable tiles.
  */
-export const products: Product[] = [
+export const projects: Project[] = [
   {
     name: "Dutch Fleet Electrification Explorer",
     status: "live",

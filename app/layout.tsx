@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     template: "%s · Open Data Project",
   },
   description:
-    "The family hub for Pixelate's Open Data Project: public data, charted one question at a time. Live products, research, and the stories hiding in public data.",
+    "The family hub for Pixelate's Open Data Project: public data, charted one question at a time. Live projects, research, and the stories hiding in public data.",
   alternates: {
     canonical: "/",
   },

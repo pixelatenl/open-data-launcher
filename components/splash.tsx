@@ -6,7 +6,7 @@ import { ThemeSwitcher } from "@/components/theme-switcher";
  * Full-viewport splash. The launcher is the one family page without a
  * header: the splash carries the brand on its own. The theme switcher
  * floats over the splash (absolute, so it scrolls away with the page),
- * and the arrow anchors down to the product tiles.
+ * and the arrow anchors down to the project tiles.
  */
 const description =
   "Public institutions collect this data with public money, so it deserves to be seen. Every figure can be verified by anyone, through the same official source. These are the stories that portal spreadsheets never tell.";
@@ -45,8 +45,8 @@ export function Splash() {
         </div>
       </div>
       <a
-        href="#products"
-        aria-label="Scroll to the products"
+        href="#projects"
+        aria-label="Scroll to the projects"
         className="splash-arrow-intro absolute bottom-6 left-1/2 z-10 flex h-11 w-11 -translate-x-1/2 items-center justify-center rounded-full border border-border bg-card/70 text-foreground backdrop-blur-md transition-colors hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
       >
         <ChevronDown

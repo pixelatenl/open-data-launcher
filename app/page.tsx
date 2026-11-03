@@ -1,5 +1,5 @@
 import { Splash } from "@/components/splash";
-import { ProductsSection } from "@/components/products-section";
+import { ProjectsSection } from "@/components/projects-section";
 import { Spotlight } from "@/components/spotlight";
 
 export const dynamic = "force-static";
@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <>
       <Splash />
-      <ProductsSection />
+      <ProjectsSection />
       <Spotlight />
       <script
         type="application/ld+json"
