@@ -33,6 +33,23 @@ export function SiteFooter() {
           </a>
           .
         </p>
+        <p className="text-sm text-muted-foreground">
+          Photo by{" "}
+          <a
+            href="https://unsplash.com/@chuttersnap"
+            className="underline decoration-primary/60 underline-offset-4 hover:decoration-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          >
+            CHUTTERSNAP
+          </a>{" "}
+          on{" "}
+          <a
+            href="https://unsplash.com/photos/electric-vehicle-charging-cable-plugged-into-car-xJLsHl0hIik"
+            className="underline decoration-primary/60 underline-offset-4 hover:decoration-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          >
+            Unsplash
+          </a>
+          .
+        </p>
       </div>
     </footer>
   );

@@ -27,6 +27,13 @@
   --ring: #48b9d1;
   --radius: 0.75rem;
   /*
+   * Full-page wash (light variant): the content below the splash sits on the
+   * splash's terminal tone (--depth, #D7EBF1 light) so the page reads as one
+   * continuous surface, with a soft radial teal pool behind the projects
+   * grid — the lighter tinted counterpart of the dark wash.
+   */
+  --projects-glow: color-mix(in srgb, var(--primary) 16%, transparent);
+  /*
    * Splash layers: brand gradient at the bottom, the dots-wave photo as a
    * low-opacity texture, and a tinted wash on top that keeps the photo in
    * the family palette. Light theme gets a lighter tinted variant.
@@ -58,6 +65,13 @@
   --border: #1d505b;
   --ring: #48b9d1;
   --radius: 0.75rem;
+  /*
+   * Full-page wash (dark variant): the splash gradient hands off into its
+   * own terminal tone (--depth, #051214), which then carries the surface to
+   * the bottom of the page; the radial teal pool behind the projects grid is
+   * the wash's one pool of light.
+   */
+  --projects-glow: color-mix(in srgb, var(--primary) 12%, transparent);
   /* dark-first brand gradient: #48B9D1 into #0F353D and #051214 */
   --splash-photo-opacity: 0.32;
   --splash-base: linear-gradient(165deg, #48b9d1 0%, #0f353d 52%, #051214 100%);
@@ -99,7 +113,15 @@ html {
 }
 
 body {
-  background-color: var(--background);
+  /*
+   * Full-page wash: the splash gradient already flows to #0F353D and its
+   * terminal #051214 (dark) / #D7EBF1 (light) inside the viewport; the
+   * content below continues on that same terminal tone (--depth), so the
+   * splash-to-content transition has no seam and the page deepens as one
+   * continuous surface. The soft radial pool behind the projects grid is
+   * layered on top via .projects-glow.
+   */
+  background-color: var(--depth);
   color: var(--foreground);
   font-family:
     ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica,
@@ -249,6 +271,30 @@ body {
     animation: none;
     filter: drop-shadow(0 0 36px rgba(72, 185, 209, 0.45));
   }
+}
+
+/* Full-page wash: one soft radial teal pool behind the projects grid. The
+ * ellipse is sized to fade fully to transparent inside the section box, so
+ * the glow meets the page surface without a seam at the section edges.
+ */
+.projects-glow {
+  background-image: radial-gradient(
+    70% 50% at 50% 64%,
+    var(--projects-glow),
+    transparent 70%
+  );
+  background-repeat: no-repeat;
+}
+
+/* Tile visual: a subtle brand gradient rising from the bottom of the 16:10
+ * slot so the photo blends into the tile surface in both themes.
+ */
+.tile-visual-fade {
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--card) 85%, transparent) 0%,
+    transparent 55%
+  );
 }
 
 .skip-link {

@@ -31,6 +31,65 @@ function DrivetrainMotif() {
   );
 }
 
+/**
+ * Placeholder motifs: abstract, decorative suggestions of the project's
+ * subject, in theme tokens, muted enough to stay a texture rather than an
+ * illustration. The wrapping slot is aria-hidden, so no alt text.
+ */
+function GridAtlasMotif() {
+  // A faint grid with a few flow lines and nodes: an electricity grid.
+  return (
+    <svg
+      viewBox="0 0 160 100"
+      preserveAspectRatio="xMidYMid slice"
+      className="h-full w-full text-primary/30"
+      fill="none"
+    >
+      <path
+        d="M30 0v100M70 0v100M110 0v100M150 0v100M10 25h140M10 55h140M10 85h140"
+        stroke="currentColor"
+        strokeWidth="1"
+        opacity="0.55"
+      />
+      <path d="M0 70h44l38-38h78" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M0 40h58l42 32h60" stroke="currentColor" strokeWidth="1.5" opacity="0.6" />
+      <g fill="currentColor">
+        <circle cx="44" cy="70" r="2.5" />
+        <circle cx="82" cy="32" r="2.5" />
+        <circle cx="100" cy="72" r="2.5" />
+        <circle cx="126" cy="40" r="2.5" />
+      </g>
+    </svg>
+  );
+}
+
+function HousingStockMotif() {
+  // A minimal skyline of ascending bars, one wearing a roof: a housing stock.
+  return (
+    <svg
+      viewBox="0 0 160 100"
+      preserveAspectRatio="xMidYMid slice"
+      className="h-full w-full text-primary/25"
+    >
+      <g fill="currentColor">
+        <rect x="24" y="64" width="14" height="24" rx="1.5" />
+        <rect x="46" y="50" width="14" height="38" rx="1.5" />
+        <rect x="68" y="60" width="14" height="28" rx="1.5" />
+        <rect x="90" y="38" width="14" height="50" rx="1.5" />
+        <rect x="112" y="54" width="14" height="34" rx="1.5" />
+        <rect x="134" y="68" width="14" height="20" rx="1.5" />
+        <path d="M86 38l11-12 11 12z" />
+      </g>
+      <path d="M16 88h140" stroke="currentColor" strokeWidth="1.5" />
+    </svg>
+  );
+}
+
+const placeholderMotifs = {
+  grid: GridAtlasMotif,
+  housing: HousingStockMotif,
+} as const;
+
 function LiveTile({ project }: { project: Project }) {
   const screenshot =
     project.screenshot && hasAsset(project.screenshot) ? project.screenshot : null;
@@ -41,13 +100,17 @@ function LiveTile({ project }: { project: Project }) {
         className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card text-card-foreground shadow-sm transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
       >
         {screenshot ? (
-          <img
-            src={screenshot}
-            alt={`Screenshot of ${project.name}`}
-            loading="lazy"
-            decoding="async"
-            className="aspect-[16/10] w-full border-b border-border object-cover"
-          />
+          <div className="relative aspect-[16/10] w-full border-b border-border">
+            <img
+              src={screenshot}
+              alt={project.screenshotAlt ?? `Screenshot of ${project.name}`}
+              loading="lazy"
+              decoding="async"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            {/* subtle brand gradient so the photo blends into the tile surface */}
+            <div aria-hidden="true" className="tile-visual-fade absolute inset-0" />
+          </div>
         ) : null}
         <div className="flex flex-1 flex-col gap-3 p-6">
           <div className="flex items-center justify-between gap-2">
@@ -68,6 +131,7 @@ function LiveTile({ project }: { project: Project }) {
 }
 
 function PlaceholderTile({ project }: { project: Project }) {
+  const Motif = project.motif ? placeholderMotifs[project.motif] : null;
   return (
     <li>
       {/* Placeholder: semantic article, deliberately no anchor */}
@@ -75,6 +139,14 @@ function PlaceholderTile({ project }: { project: Project }) {
         aria-label={`${project.name} (${projectStatusLabel[project.status]})`}
         className="flex h-full flex-col gap-3 rounded-xl border border-dashed border-border bg-muted/50 p-6 text-muted-foreground"
       >
+        {Motif ? (
+          <div
+            aria-hidden="true"
+            className="aspect-[16/10] w-full overflow-hidden rounded-lg bg-muted/40"
+          >
+            <Motif />
+          </div>
+        ) : null}
         <div className="flex items-center justify-between gap-2">
           <Chip tone="muted">{projectStatusLabel[project.status]}</Chip>
           <Lock size={16} aria-hidden="true" className="text-muted-foreground" />
@@ -102,7 +174,7 @@ export function ProjectsSection() {
     <section
       id="projects"
       aria-labelledby="projects-title"
-      className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24"
+      className="projects-glow mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24"
     >
       <h2 id="projects-title" className="text-3xl font-semibold tracking-tight sm:text-4xl">
         The projects
