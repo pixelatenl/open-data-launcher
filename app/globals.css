@@ -177,6 +177,25 @@ body {
   animation: splash-fade-in 0.8s ease-out 3.6s both;
 }
 
+/*
+ * The logo glow returns once the drop animation has finished (last
+ * cell lands at 1.9s + 1s). The from-frame is filter: none, so during
+ * the fall no filter is applied and the svg does not clip its
+ * overflowing cells; fill-mode both keeps the glow on afterwards.
+ */
+.splash-logo {
+  animation: logo-glow-in 0.8s ease-out 2.9s both;
+}
+
+@keyframes logo-glow-in {
+  from {
+    filter: none;
+  }
+  to {
+    filter: drop-shadow(0 0 36px rgba(72, 185, 209, 0.45));
+  }
+}
+
 @keyframes logo-cell-drop {
   0% {
     transform: translateY(-2500%);
@@ -224,6 +243,11 @@ body {
   .splash-intro,
   .splash-arrow-intro {
     animation: none;
+  }
+  /* with no intro, the glow is simply always on */
+  .splash-logo {
+    animation: none;
+    filter: drop-shadow(0 0 36px rgba(72, 185, 209, 0.45));
   }
 }
 
