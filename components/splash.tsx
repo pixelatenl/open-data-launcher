@@ -26,7 +26,7 @@ export function Splash() {
         <div className="flex items-center gap-6 sm:gap-10">
           <PixelLogo
             size={112}
-            className="h-16 w-16 shrink-0 text-primary drop-shadow-[0_0_36px_rgba(72,185,209,0.45)] sm:h-28 sm:w-28"
+            className="h-16 w-16 shrink-0 overflow-visible text-primary sm:h-28 sm:w-28"
           />
           <div className="splash-intro">
             <h1

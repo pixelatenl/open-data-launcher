@@ -152,13 +152,15 @@ body {
 
 /*
  * Splash intro (one run on page load, no looping):
- * the logo cells drop from above their grid position and bounce into
- * place — row by row, top-left first, 0.25s apart — adapted from the
- * pixelate.nl logo keyframes. fill-mode both keeps each cell at its
- * 0% frame (hidden) until its delayed start; transform-box: fill-box
- * makes every translateY percentage relative to the 28-unit cell.
- * The title block fades in once the logo has assembled, the scroll
- * arrow appears last.
+ * the logo cells fall in from the top of the browser — the svg is
+ * overflow: visible, so the cells render above the logo frame and are
+ * clipped only by the splash section at the viewport top — then bounce
+ * into place, adapted from the pixelate.nl logo keyframes (-2500% start,
+ * +30% / -10% / +10% / -5% / 0% bounce). fill-mode both keeps each cell
+ * at its 0% frame (hidden) until its delayed start; transform-box:
+ * fill-box makes every translateY percentage relative to the 28-unit
+ * cell. The title block fades in once the logo has assembled, the
+ * scroll arrow appears last.
  */
 .logo-cell {
   transform-box: fill-box;
@@ -177,7 +179,7 @@ body {
 
 @keyframes logo-cell-drop {
   0% {
-    transform: translateY(-300%);
+    transform: translateY(-2500%);
     visibility: hidden;
   }
   50% {
