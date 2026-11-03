@@ -34,6 +34,12 @@
    */
   --projects-glow: color-mix(in srgb, var(--primary) 16%, transparent);
   /*
+   * Live-tile hover glow: the tile lights up with a restrained teal halo
+   * in addition to the border line. Softer on the light surface, a touch
+   * stronger on the dark one so it reads on both.
+   */
+  --tile-glow: 0 0 24px rgba(72, 185, 209, 0.28);
+  /*
    * Splash layers: brand gradient at the bottom, the dots-wave photo as a
    * low-opacity texture, and a tinted wash on top that keeps the photo in
    * the family palette. Light theme gets a lighter tinted variant.
@@ -72,6 +78,7 @@
    * the wash's one pool of light.
    */
   --projects-glow: color-mix(in srgb, var(--primary) 12%, transparent);
+  --tile-glow: 0 0 24px rgba(72, 185, 209, 0.35);
   /* dark-first brand gradient: #48B9D1 into #0F353D and #051214 */
   --splash-photo-opacity: 0.32;
   --splash-base: linear-gradient(165deg, #48b9d1 0%, #0f353d 52%, #051214 100%);

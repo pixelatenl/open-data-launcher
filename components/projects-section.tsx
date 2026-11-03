@@ -97,7 +97,7 @@ function LiveTile({ project }: { project: Project }) {
     <li>
       <a
         href={project.url}
-        className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card text-card-foreground shadow-sm transition-colors hover:border-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+        className="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card text-card-foreground shadow-sm transition-[border-color,box-shadow] hover:border-primary hover:shadow-[var(--tile-glow)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring focus-visible:shadow-[var(--tile-glow)]"
       >
         {screenshot ? (
           <div className="relative aspect-[16/10] w-full border-b border-border">
@@ -183,10 +183,6 @@ export function ProjectsSection() {
         Each project charts one public dataset, one question at a time. Live projects open
         straight from their tile; the rest are still in research.
       </p>
-      <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-        Across the projects, AI explains what the charts show — always labelled experimental,
-        with every figure computed from the official source.
-      </p>
       <ul className="mt-10 grid list-none gap-5 p-0 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((project) =>
           project.status === "live" && project.url ? (
@@ -197,6 +193,10 @@ export function ProjectsSection() {
         )}
         <GhostTile />
       </ul>
+      <p className="mt-6 text-sm leading-relaxed text-muted-foreground">
+        Across the projects, AI explains what the charts show, always labelled experimental,
+        with every figure computed from the official source.
+      </p>
     </section>
   );
 }
