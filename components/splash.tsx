@@ -24,26 +24,28 @@ export function Splash() {
       <div className="absolute right-4 top-4 z-20 sm:right-6 sm:top-6">
         <ThemeSwitcher />
       </div>
-      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col items-center justify-center gap-10 px-4 pb-28 pt-24 sm:px-6 md:flex-row md:gap-16 md:py-28">
-        <PixelLogo
-          size={112}
-          className="shrink-0 text-primary drop-shadow-[0_0_36px_rgba(72,185,209,0.45)]"
-        />
-        <div className="splash-glass w-full max-w-2xl rounded-2xl p-7 sm:p-10">
-          <h1
-            id="splash-title"
-            className="text-4xl font-bold tracking-tight text-balance sm:text-6xl"
-          >
-            Open Data Project
-          </h1>
-          <p className="mt-5 text-2xl font-medium tracking-tight text-balance sm:text-3xl">
-            The <span className="text-accent">stories</span> hiding in public data.
-          </p>
-          <div className="mt-5 space-y-3 text-base leading-relaxed text-muted-foreground sm:text-lg">
-            {description.map((paragraph) => (
-              <p key={paragraph.slice(0, 24)}>{paragraph}</p>
-            ))}
+      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 pb-28 pt-24 sm:px-6 md:py-28">
+        <div className="flex items-center gap-6 sm:gap-10">
+          <PixelLogo
+            size={112}
+            className="h-16 w-16 shrink-0 text-primary drop-shadow-[0_0_36px_rgba(72,185,209,0.45)] sm:h-28 sm:w-28"
+          />
+          <div>
+            <h1
+              id="splash-title"
+              className="text-4xl font-bold tracking-tight text-balance sm:text-6xl"
+            >
+              Open Data Project
+            </h1>
+            <p className="mt-3 text-xl font-medium tracking-tight text-balance sm:mt-4 sm:text-3xl">
+              The <span className="text-accent">stories</span> hiding in public data.
+            </p>
           </div>
+        </div>
+        <div className="mt-10 max-w-2xl space-y-3 text-base leading-relaxed text-muted-foreground sm:text-lg md:mt-12">
+          {description.map((paragraph) => (
+            <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+          ))}
         </div>
       </div>
       <a
