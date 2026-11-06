@@ -47,7 +47,7 @@ export const projects: Project[] = [
     status: "live",
     url: "https://justice.pixelate.nl",
     screenshot: "/images/project-courtroom.jpg",
-    screenshotAlt: "Black and white photograph of an empty room",
+    screenshotAlt: "Black and white photograph of an empty prison cell",
     description:
       "What the Dutch courts rule on, charted question by question from the open data of the Dutch judiciary.",
   },
