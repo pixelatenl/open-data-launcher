@@ -90,6 +90,15 @@ const placeholderMotifs = {
   housing: HousingStockMotif,
 } as const;
 
+/**
+ * Card title font styling, verbatim from the open-data-family
+ * section-pattern (SectionHeading in components/family-section.tsx):
+ * the family display heading treatment, primary token in light and
+ * white in dark, heavy weight with tight tracking.
+ */
+const cardTitle =
+  "text-2xl font-extrabold leading-tight tracking-tight text-primary sm:text-3xl dark:text-white";
+
 function LiveTile({ project }: { project: Project }) {
   const screenshot =
     project.screenshot && hasAsset(project.screenshot) ? project.screenshot : null;
@@ -121,7 +130,7 @@ function LiveTile({ project }: { project: Project }) {
               className="text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
             />
           </div>
-          <h3 className="text-lg font-semibold leading-snug">{project.name}</h3>
+          <h3 className={cardTitle}>{project.name}</h3>
           <p className="text-sm leading-relaxed text-muted-foreground">{project.description}</p>
           {!screenshot && <DrivetrainMotif />}
         </div>
@@ -151,7 +160,7 @@ function PlaceholderTile({ project }: { project: Project }) {
           <Chip tone="muted">{projectStatusLabel[project.status]}</Chip>
           <Lock size={16} aria-hidden="true" className="text-muted-foreground" />
         </div>
-        <h3 className="text-lg font-semibold leading-snug">{project.name}</h3>
+        <h3 className={cardTitle}>{project.name}</h3>
         <p className="text-sm leading-relaxed">{project.description}</p>
       </article>
     </li>
@@ -162,7 +171,7 @@ function GhostTile() {
   return (
     <li>
       <div className="flex h-full flex-col justify-center gap-3 rounded-xl border border-dashed border-border bg-muted/30 p-card text-muted-foreground">
-        <h3 className="text-lg font-semibold leading-snug">More to come</h3>
+        <h3 className={cardTitle}>More to come</h3>
         <p className="text-sm leading-relaxed">New projects are always in research.</p>
       </div>
     </li>
