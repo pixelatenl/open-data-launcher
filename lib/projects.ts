@@ -43,6 +43,15 @@ export const projects: Project[] = [
       "How electric the Dutch vehicle fleet really is, charted question by question from the RDW open register of vehicles.",
   },
   {
+    name: "Dutch Courtroom Explorer",
+    status: "live",
+    url: "https://justice.pixelate.nl",
+    screenshot: "/images/project-courtroom.jpg",
+    screenshotAlt: "Black and white photograph of an empty room",
+    description:
+      "What the Dutch courts rule on, charted question by question from the open data of the Dutch judiciary.",
+  },
+  {
     name: "Green Grid Atlas",
     status: "in-research",
     motif: "grid",

@@ -20,7 +20,7 @@ function GithubMark({ size = 16 }: { size?: number }) {
 export function SiteFooter() {
   return (
     <footer className="border-t border-border bg-depth">
-      <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-10 sm:px-6">
+      <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-block sm:px-6">
         <p className="text-sm">
           <span className="font-semibold">Open Data Project</span>, built by{" "}
           <a
@@ -71,6 +71,23 @@ export function SiteFooter() {
           on{" "}
           <a
             href="https://unsplash.com/photos/electric-vehicle-charging-cable-plugged-into-car-xJLsHl0hIik"
+            className="underline decoration-primary/60 underline-offset-4 hover:decoration-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          >
+            Unsplash
+          </a>
+          .
+        </p>
+        <p className="text-sm text-muted-foreground">
+          Photo by{" "}
+          <a
+            href="https://unsplash.com/@emilianobar"
+            className="underline decoration-primary/60 underline-offset-4 hover:decoration-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+          >
+            Emiliano Bar
+          </a>{" "}
+          on{" "}
+          <a
+            href="https://unsplash.com/photos/empty-room-PaKHbtTDqt0"
             className="underline decoration-primary/60 underline-offset-4 hover:decoration-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
           >
             Unsplash
