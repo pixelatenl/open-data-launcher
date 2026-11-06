@@ -145,25 +145,34 @@ function PlaceholderTile({ project }: { project: Project }) {
   const Motif = project.motif ? placeholderMotifs[project.motif] : null;
   return (
     <li>
-      {/* Placeholder: semantic article, deliberately no anchor */}
+      {/*
+        Placeholder: semantic article, deliberately no anchor. Same
+        skeleton as the live tile: a full-bleed 16:10 motif slot with a
+        bottom hairline, then the padded body, so the chip, title, and
+        description sit at the same offsets as on the live cards. Only
+        the treatment differs: dashed border, muted surface, no hover
+        glow, no link.
+      */}
       <article
         aria-label={`${project.name} (${projectStatusLabel[project.status]})`}
-        className="flex h-full flex-col gap-3 rounded-xl border border-dashed border-border bg-muted/50 p-card text-muted-foreground"
+        className="flex h-full flex-col overflow-hidden rounded-xl border border-dashed border-border bg-muted/50 text-muted-foreground"
       >
         {Motif ? (
           <div
             aria-hidden="true"
-            className="aspect-[16/10] w-full overflow-hidden rounded-lg bg-muted/40"
+            className="relative aspect-[16/10] w-full overflow-hidden border-b border-border bg-muted/40"
           >
             <Motif />
           </div>
         ) : null}
-        <div className="flex items-center justify-between gap-2">
-          <Chip tone="muted">{projectStatusLabel[project.status]}</Chip>
-          <Lock size={16} aria-hidden="true" className="text-muted-foreground" />
+        <div className="flex flex-1 flex-col gap-3 p-card">
+          <div className="flex items-center justify-between gap-2">
+            <Chip tone="muted">{projectStatusLabel[project.status]}</Chip>
+            <Lock size={16} aria-hidden="true" className="text-muted-foreground" />
+          </div>
+          <h3 className={cardTitle}>{project.name}</h3>
+          <p className="text-base leading-relaxed sm:text-lg">{project.description}</p>
         </div>
-        <h3 className={cardTitle}>{project.name}</h3>
-        <p className="text-base leading-relaxed sm:text-lg">{project.description}</p>
       </article>
     </li>
   );
