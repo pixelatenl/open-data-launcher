@@ -131,7 +131,9 @@ function LiveTile({ project }: { project: Project }) {
             />
           </div>
           <h3 className={cardTitle}>{project.name}</h3>
-          <p className="text-sm leading-relaxed text-muted-foreground">{project.description}</p>
+          <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+            {project.description}
+          </p>
           {!screenshot && <DrivetrainMotif />}
         </div>
       </a>
@@ -161,7 +163,7 @@ function PlaceholderTile({ project }: { project: Project }) {
           <Lock size={16} aria-hidden="true" className="text-muted-foreground" />
         </div>
         <h3 className={cardTitle}>{project.name}</h3>
-        <p className="text-sm leading-relaxed">{project.description}</p>
+        <p className="text-base leading-relaxed sm:text-lg">{project.description}</p>
       </article>
     </li>
   );
@@ -172,7 +174,9 @@ function GhostTile() {
     <li>
       <div className="flex h-full flex-col justify-center gap-3 rounded-xl border border-dashed border-border bg-muted/30 p-card text-muted-foreground">
         <h3 className={cardTitle}>More to come</h3>
-        <p className="text-sm leading-relaxed">New projects are always in research.</p>
+        <p className="text-base leading-relaxed sm:text-lg">
+          New projects are always in research.
+        </p>
       </div>
     </li>
   );

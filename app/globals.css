@@ -135,7 +135,8 @@
  * section heading text-3xl sm:text-4xl, card titles take the open-data-family
  * section-pattern heading (text-2xl sm:text-3xl font-extrabold text-primary
  * dark:text-white), body text-base (text-lg sm:text-xl in the splash,
- * text-sm inside cards and the footer), labels text-xs.
+ * text-base sm:text-lg as card descriptions, text-sm in the footer),
+ * labels text-xs.
  */
 
 html {
