@@ -131,12 +131,13 @@
 
 /*
  * Type scale: Tailwind's built-in steps, mapped consistently page-wide.
- * Display text-5xl sm:text-7xl (splash title), tagline text-2xl sm:text-4xl,
- * section heading text-3xl sm:text-4xl, card titles take the open-data-family
- * section-pattern heading (text-2xl sm:text-3xl font-extrabold text-primary
- * dark:text-white), body text-base (text-lg sm:text-xl in the splash,
- * text-base sm:text-lg as card descriptions, text-sm in the footer),
- * labels text-xs.
+ * Display text-5xl sm:text-7xl (splash title), tagline text-2xl sm:text-4xl.
+ * Headings in the open-data-family section-pattern style (font-extrabold
+ * leading-tight tracking-tight text-primary dark:text-white): card titles
+ * at text-2xl sm:text-3xl, the projects section title one rung larger at
+ * text-3xl sm:text-4xl. Body: section ledes and the splash intro
+ * text-lg sm:text-xl, card descriptions text-base sm:text-lg, footer and
+ * notes text-sm, labels text-xs.
  */
 
 html {

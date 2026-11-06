@@ -99,6 +99,14 @@ const placeholderMotifs = {
 const cardTitle =
   "text-2xl font-extrabold leading-tight tracking-tight text-primary sm:text-3xl dark:text-white";
 
+/**
+ * Section title font styling: the same open-data-family section-pattern
+ * heading as the card titles, one scale rung larger, because this is
+ * the title of the section.
+ */
+const sectionTitle =
+  "text-3xl font-extrabold leading-tight tracking-tight text-primary sm:text-4xl dark:text-white";
+
 function LiveTile({ project }: { project: Project }) {
   const screenshot =
     project.screenshot && hasAsset(project.screenshot) ? project.screenshot : null;
@@ -198,10 +206,10 @@ export function ProjectsSection() {
       aria-labelledby="projects-title"
       className="projects-glow mx-auto max-w-[1536px] px-4 py-20 sm:px-6 sm:py-section"
     >
-      <h2 id="projects-title" className="text-3xl font-semibold tracking-tight sm:text-4xl">
+      <h2 id="projects-title" className={sectionTitle}>
         The projects
       </h2>
-      <p className="mt-4 max-w-2xl leading-relaxed text-muted-foreground">
+      <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
         Each project charts one public dataset, one question at a time. Live projects open
         straight from their tile; the rest are still in research.
       </p>
