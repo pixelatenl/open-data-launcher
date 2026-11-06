@@ -22,7 +22,7 @@ export function Splash() {
       <div className="absolute right-4 top-4 z-20 sm:right-6 sm:top-6">
         <ThemeSwitcher />
       </div>
-      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 pb-28 pt-24 sm:px-6 sm:py-28">
+      <div className="relative z-10 mx-auto flex w-full max-w-[1536px] flex-1 flex-col justify-center px-4 pb-28 pt-24 sm:px-6 sm:py-28">
         <div className="flex items-center gap-6 sm:gap-8">
           <PixelLogo
             size={128}
