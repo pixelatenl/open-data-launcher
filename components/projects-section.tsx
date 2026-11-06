@@ -90,6 +90,23 @@ const placeholderMotifs = {
   housing: HousingStockMotif,
 } as const;
 
+/**
+ * Card title font styling, verbatim from the open-data-family
+ * section-pattern (SectionHeading in components/family-section.tsx):
+ * the family display heading treatment, primary token in light and
+ * white in dark, heavy weight with tight tracking.
+ */
+const cardTitle =
+  "text-2xl font-extrabold leading-tight tracking-tight text-primary sm:text-3xl dark:text-white";
+
+/**
+ * Section title font styling: the same open-data-family section-pattern
+ * heading as the card titles, one scale rung larger, because this is
+ * the title of the section.
+ */
+const sectionTitle =
+  "text-3xl font-extrabold leading-tight tracking-tight text-primary sm:text-4xl dark:text-white";
+
 function LiveTile({ project }: { project: Project }) {
   const screenshot =
     project.screenshot && hasAsset(project.screenshot) ? project.screenshot : null;
@@ -112,7 +129,7 @@ function LiveTile({ project }: { project: Project }) {
             <div aria-hidden="true" className="tile-visual-fade absolute inset-0" />
           </div>
         ) : null}
-        <div className="flex flex-1 flex-col gap-3 p-6">
+        <div className="flex flex-1 flex-col gap-3 p-card">
           <div className="flex items-center justify-between gap-2">
             <Chip tone="accent">{projectStatusLabel[project.status]}</Chip>
             <ArrowUpRight
@@ -121,8 +138,10 @@ function LiveTile({ project }: { project: Project }) {
               className="text-muted-foreground transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary"
             />
           </div>
-          <h3 className="text-lg font-semibold leading-snug">{project.name}</h3>
-          <p className="text-sm leading-relaxed text-muted-foreground">{project.description}</p>
+          <h3 className={cardTitle}>{project.name}</h3>
+          <p className="text-base leading-relaxed text-muted-foreground sm:text-lg">
+            {project.description}
+          </p>
           {!screenshot && <DrivetrainMotif />}
         </div>
       </a>
@@ -134,25 +153,34 @@ function PlaceholderTile({ project }: { project: Project }) {
   const Motif = project.motif ? placeholderMotifs[project.motif] : null;
   return (
     <li>
-      {/* Placeholder: semantic article, deliberately no anchor */}
+      {/*
+        Placeholder: semantic article, deliberately no anchor. Same
+        skeleton as the live tile: a full-bleed 16:10 motif slot with a
+        bottom hairline, then the padded body, so the chip, title, and
+        description sit at the same offsets as on the live cards. Only
+        the treatment differs: dashed border, muted surface, no hover
+        glow, no link.
+      */}
       <article
         aria-label={`${project.name} (${projectStatusLabel[project.status]})`}
-        className="flex h-full flex-col gap-3 rounded-xl border border-dashed border-border bg-muted/50 p-6 text-muted-foreground"
+        className="flex h-full flex-col overflow-hidden rounded-xl border border-dashed border-border bg-muted/50 text-muted-foreground"
       >
         {Motif ? (
           <div
             aria-hidden="true"
-            className="aspect-[16/10] w-full overflow-hidden rounded-lg bg-muted/40"
+            className="relative aspect-[16/10] w-full overflow-hidden border-b border-border bg-muted/40"
           >
             <Motif />
           </div>
         ) : null}
-        <div className="flex items-center justify-between gap-2">
-          <Chip tone="muted">{projectStatusLabel[project.status]}</Chip>
-          <Lock size={16} aria-hidden="true" className="text-muted-foreground" />
+        <div className="flex flex-1 flex-col gap-3 p-card">
+          <div className="flex items-center justify-between gap-2">
+            <Chip tone="muted">{projectStatusLabel[project.status]}</Chip>
+            <Lock size={16} aria-hidden="true" className="text-muted-foreground" />
+          </div>
+          <h3 className={cardTitle}>{project.name}</h3>
+          <p className="text-base leading-relaxed sm:text-lg">{project.description}</p>
         </div>
-        <h3 className="text-lg font-semibold leading-snug">{project.name}</h3>
-        <p className="text-sm leading-relaxed">{project.description}</p>
       </article>
     </li>
   );
@@ -161,9 +189,11 @@ function PlaceholderTile({ project }: { project: Project }) {
 function GhostTile() {
   return (
     <li>
-      <div className="flex h-full flex-col justify-center gap-2 rounded-xl border border-dashed border-border bg-muted/30 p-6 text-muted-foreground">
-        <h3 className="text-lg font-semibold">More to come</h3>
-        <p className="text-sm leading-relaxed">New projects are always in research.</p>
+      <div className="flex h-full flex-col justify-center gap-3 rounded-xl border border-dashed border-border bg-muted/30 p-card text-muted-foreground">
+        <h3 className={cardTitle}>More to come</h3>
+        <p className="text-base leading-relaxed sm:text-lg">
+          New projects are always in research.
+        </p>
       </div>
     </li>
   );
@@ -174,16 +204,16 @@ export function ProjectsSection() {
     <section
       id="projects"
       aria-labelledby="projects-title"
-      className="projects-glow mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24"
+      className="projects-glow mx-auto max-w-[1536px] px-4 py-20 sm:px-6 sm:py-section"
     >
-      <h2 id="projects-title" className="text-3xl font-semibold tracking-tight sm:text-4xl">
+      <h2 id="projects-title" className={sectionTitle}>
         The projects
       </h2>
-      <p className="mt-4 max-w-2xl leading-relaxed text-muted-foreground">
+      <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
         Each project charts one public dataset, one question at a time. Live projects open
         straight from their tile; the rest are still in research.
       </p>
-      <ul className="mt-10 grid list-none gap-5 p-0 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-block grid list-none gap-grid p-0 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((project) =>
           project.status === "live" && project.url ? (
             <LiveTile key={project.name} project={project} />
