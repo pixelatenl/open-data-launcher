@@ -174,7 +174,7 @@ export function ProjectsSection() {
     <section
       id="projects"
       aria-labelledby="projects-title"
-      className="projects-glow mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-section"
+      className="projects-glow mx-auto max-w-[1536px] px-4 py-20 sm:px-6 sm:py-section"
     >
       <h2 id="projects-title" className="text-3xl font-semibold tracking-tight sm:text-4xl">
         The projects
