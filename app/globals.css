@@ -115,6 +115,27 @@
   --animate-splash-bob: splash-bob 2.4s ease-in-out infinite;
 }
 
+@theme {
+  /*
+   * Vertical rhythm tokens: one small scale drives the section padding,
+   * the gaps between the major blocks of a section, card internals, and
+   * the tile grid. Every value sits on the 0.25rem base step, so these
+   * named tokens and the plain step utilities (mt-4, mt-6, gap-3, ...)
+   * read as one rhythm instead of one-off values.
+   */
+  --spacing-section: 6rem; /* section vertical padding from sm up */
+  --spacing-block: 2.5rem; /* between a section's heading block and its grid */
+  --spacing-card: 1.5rem; /* padding inside tiles */
+  --spacing-grid: 1.5rem; /* gap of the project tile grid */
+}
+
+/*
+ * Type scale: Tailwind's built-in steps, mapped consistently page-wide.
+ * Display text-4xl sm:text-6xl (splash title), tagline text-xl sm:text-3xl,
+ * section heading text-3xl sm:text-4xl, card title text-lg, body text-base
+ * (text-lg in the splash, text-sm inside cards and the footer), labels text-xs.
+ */
+
 html {
   scroll-behavior: smooth;
 }

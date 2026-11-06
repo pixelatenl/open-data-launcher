@@ -4,7 +4,7 @@ export function Spotlight() {
   return (
     <section
       aria-labelledby="spotlight-title"
-      className="mx-auto max-w-6xl px-4 pb-20 pt-16 sm:px-6 sm:pb-24 sm:pt-20"
+      className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-section"
     >
       <a
         href="https://github.com/pixelatenl/home-energy-dashboard"
@@ -14,7 +14,7 @@ export function Spotlight() {
           <FlaskConical size={16} aria-hidden="true" />
           From the workbench
         </p>
-        <h2 id="spotlight-title" className="mt-3 text-2xl font-semibold tracking-tight sm:text-3xl">
+        <h2 id="spotlight-title" className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
           Home Energy Dashboard
         </h2>
         <p className="mt-4 max-w-2xl leading-relaxed text-muted-foreground">

@@ -112,7 +112,7 @@ function LiveTile({ project }: { project: Project }) {
             <div aria-hidden="true" className="tile-visual-fade absolute inset-0" />
           </div>
         ) : null}
-        <div className="flex flex-1 flex-col gap-3 p-6">
+        <div className="flex flex-1 flex-col gap-3 p-card">
           <div className="flex items-center justify-between gap-2">
             <Chip tone="accent">{projectStatusLabel[project.status]}</Chip>
             <ArrowUpRight
@@ -137,7 +137,7 @@ function PlaceholderTile({ project }: { project: Project }) {
       {/* Placeholder: semantic article, deliberately no anchor */}
       <article
         aria-label={`${project.name} (${projectStatusLabel[project.status]})`}
-        className="flex h-full flex-col gap-3 rounded-xl border border-dashed border-border bg-muted/50 p-6 text-muted-foreground"
+        className="flex h-full flex-col gap-3 rounded-xl border border-dashed border-border bg-muted/50 p-card text-muted-foreground"
       >
         {Motif ? (
           <div
@@ -161,8 +161,8 @@ function PlaceholderTile({ project }: { project: Project }) {
 function GhostTile() {
   return (
     <li>
-      <div className="flex h-full flex-col justify-center gap-2 rounded-xl border border-dashed border-border bg-muted/30 p-6 text-muted-foreground">
-        <h3 className="text-lg font-semibold">More to come</h3>
+      <div className="flex h-full flex-col justify-center gap-3 rounded-xl border border-dashed border-border bg-muted/30 p-card text-muted-foreground">
+        <h3 className="text-lg font-semibold leading-snug">More to come</h3>
         <p className="text-sm leading-relaxed">New projects are always in research.</p>
       </div>
     </li>
@@ -174,7 +174,7 @@ export function ProjectsSection() {
     <section
       id="projects"
       aria-labelledby="projects-title"
-      className="projects-glow mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24"
+      className="projects-glow mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-section"
     >
       <h2 id="projects-title" className="text-3xl font-semibold tracking-tight sm:text-4xl">
         The projects
@@ -183,7 +183,7 @@ export function ProjectsSection() {
         Each project charts one public dataset, one question at a time. Live projects open
         straight from their tile; the rest are still in research.
       </p>
-      <ul className="mt-10 grid list-none gap-5 p-0 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-block grid list-none gap-grid p-0 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((project) =>
           project.status === "live" && project.url ? (
             <LiveTile key={project.name} project={project} />

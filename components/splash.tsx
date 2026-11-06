@@ -22,8 +22,8 @@ export function Splash() {
       <div className="absolute right-4 top-4 z-20 sm:right-6 sm:top-6">
         <ThemeSwitcher />
       </div>
-      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 pb-28 pt-24 sm:px-6 md:py-28">
-        <div className="flex items-center gap-6 sm:gap-10">
+      <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-1 flex-col justify-center px-4 pb-28 pt-24 sm:px-6 sm:py-28">
+        <div className="flex items-center gap-6 sm:gap-8">
           <PixelLogo
             size={112}
             className="h-16 w-16 shrink-0 overflow-visible text-primary splash-logo sm:h-28 sm:w-28"
@@ -35,12 +35,12 @@ export function Splash() {
             >
               Open Data Project
             </h1>
-            <p className="mt-3 text-xl font-medium tracking-tight text-balance sm:mt-4 sm:text-3xl">
+            <p className="mt-4 text-xl font-medium tracking-tight text-balance sm:text-3xl">
               The <span className="text-accent">stories</span> hiding in <span className="text-accent">public data</span>.
             </p>
           </div>
         </div>
-        <div className="splash-intro mt-10 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg md:mt-12">
+        <div className="splash-intro mt-10 max-w-2xl text-base leading-relaxed text-muted-foreground sm:mt-12 sm:text-lg">
           <p>{description}</p>
         </div>
       </div>
