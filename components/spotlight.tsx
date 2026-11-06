@@ -26,7 +26,7 @@ export function Spotlight() {
   return (
     <section
       aria-labelledby="spotlight-title"
-      className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-section"
+      className="mx-auto max-w-[1536px] px-4 py-20 sm:px-6 sm:py-section"
     >
       {hasAsset(codaPhoto) ? (
         /*
