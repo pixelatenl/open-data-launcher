@@ -1,0 +1,4 @@
+User-Agent: *
+Allow: /
+
+Sitemap: https://opendata.pixelate.nl/sitemap.xml
